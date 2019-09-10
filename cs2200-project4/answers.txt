@@ -1,0 +1,66 @@
+CS 2200 Spring 2018
+Project 4
+
+Name: Abhinav Tirath
+GT Username: atirath6
+
+Problem 1B
+----------
+Execution Times:
+1 CPU: 67.6 s
+2 CPUs: 37.1 s
+4 CPUs: 35.2 s
+
+There is not a linear relationship between the number of CPUs because there is little change between 2 and 4 CPUs. The function
+appears to be logarithmic. Increasing the number of cores makes it faster simply because we are able to run more tasks concurrently.
+However, we clearly do not have enough tasks to have a large ready queue with 2 cores, so 4 cores is only slightly better.
+
+Problem 2B
+----------
+Results for the Round-Robin Simulations:
+
+Timeslice for 800 ms:
+# of Context Switches: 136
+Total execution time: 67.6 s
+Total time spent in READY state: 325.4 s
+
+Timeslice for 600 ms:
+# of Context Switches: 161
+Total execution time: 67.6 s
+Total time spent in READY state: 314.0 s
+
+Timeslice for 400 ms:
+# of Context Switches: 201
+Total execution time: 67.8 s
+Total time spent in READY state: 303.8 s
+
+Timeslice for 200 ms:
+# of Context Switches: 362
+Total execution time: 67.5 s
+Total time spent in READY state: 285.2 s
+
+Although the total waiting time increases as the timeslice decreases, a smaller timeslice will cause the total waiting time to be greater.
+This is because even short tasks will take several dedicated timeslices to finish. Since the processes go in a loop, spending several
+timeslices on short tasks will increase total waiting time. Also, context-switching takes some time, and doing it too often will
+increase the total waiting time.
+
+Problem 3B
+----------
+
+Waiting Times:
+FIFO: 390.3 s
+Round-Robin: 311.1 s
+Priority: 138.3 s
+
+An SRTF algorithm is very difficult to implement because we have to estimate the remaining running time, which is difficult to do.
+If we incorrectly estimate, we may place a longer process in front of a shorter one. On the other hand, with priority, we don't
+have to do any calculations or estimations; we can simply place it wherever it needs to be. This is why it is easier to implement
+priority.
+
+Priority had the shortest waiting time. This is not necessarily the case in general. The priority must often schedule short processes
+before longer processes to get shorter waiting times, similar to what SRTF would do. This seems to have something to do with how
+the priority for each process is decided; my guess that shorter processes will often have higher priority in the backend somehow.
+I asked a TA about this, but they weren't totally sure how to approach this question and said this response was fine.
+For FIFO, shorter timeslices may have to wait a long time for longer processes to finish before getting the attention
+of the processor. This convoy effect results in longer waiting times. For Round-Robin, the fairly short processes may have to wait
+several cycles before being completed, which will also increase waiting times.

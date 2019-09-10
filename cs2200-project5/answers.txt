@@ -1,0 +1,5 @@
+A. The protocol ensures that packets are delivered by sending back an ACK or a NACK. If sender receives back an ACK, it knows that the receiver correctly received the packet and moves on to the next packet. However, if the sender receives a NACK, it knows that the receiver did not receive the packet correctly, so it resends that packet until it receives an ACK.
+
+B. There are a couple of benefits to dividing a message into multiple packets. First, you would have to resend the whole message if the sending failed in any way. By breaking the message into packets, we only have to resend a small portion of the message when a failure occurs. Second, the bandwidth may be too small to send the whole message at the same time. So, we must break it into packets to send it.
+
+C. Instead of the stop and wait protocol we have implemented in this project, e could implement Sliding Window protocol. This allows us to send multiple packets at the same time, check whether we receive ACKs or not on each of those packets, and resend the packets if necessary. This allows us to send and receive multiple packets/ACKs/NACKs at the same time, speeding up the process overall.
